@@ -1,7 +1,5 @@
-//src/app/services/scanService.ts
-// Mock scan service - simulates repository scanning and analysis
-
-import { mockScanResult, type ScanResult } from './mockData';
+// src/app/services/scanService.ts
+import { mockScanResult, type ScanResult, type ConsentIssue } from './mockData';
 
 export interface ScanProgress {
   stage: string;
@@ -9,19 +7,22 @@ export interface ScanProgress {
   message: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8787';
+const API_BASE_URL = import.meta.env.PROD ? '' : (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8787');
 
 async function tryApiFetch<T>(path: string, init: RequestInit): Promise<T | null> {
   try {
     const response = await fetch(`${API_BASE_URL}${path}`, init);
-    if (!response.ok) return null;
+    if (!response.ok) {
+      console.error(`API Error: ${response.status} at ${path}`);
+      return null;
+    }
     return response.json() as Promise<T>;
-  } catch {
+  } catch (error) {
+    console.error(`API Connection Failed:`, error);
     return null;
   }
 }
 
-// Simulate repository scanning with progress updates
 export async function scanRepository(
   repoUrl: string,
   onProgress?: (progress: ScanProgress) => void
@@ -37,41 +38,30 @@ export async function scanRepository(
   for (let i = 0; i < stages.length; i++) {
     const stage = stages[i];
     const progress = ((i + 1) / stages.length) * 100;
-    
-    onProgress?.({
-      stage: stage.stage,
-      progress,
-      message: stage.message,
-    });
-
+    onProgress?.({ stage: stage.stage, progress, message: stage.message });
     await new Promise(resolve => setTimeout(resolve, stage.duration));
   }
 
-  type ScanResponse = {
-    result: ScanResult;
-  };
-
+  type ScanResponse = { result: ScanResult };
   const apiResult = await tryApiFetch<ScanResponse>('/api/scan', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ repoUrl }),
   });
 
-  return apiResult?.result ?? mockScanResult;
+  if (!apiResult) {
+    throw new Error("Backend API is unreachable. Check your server terminal.");
+  }
+
+  return apiResult.result;
 }
 
-// Guardian AI integration - analyze specific issue
-export async function analyzeIssueWithBob(issueId: string): Promise<string> {
-  const fallback = `Guardian AI has analyzed this issue and identified it as a ${
-    ['GDPR', 'CCPA', 'COPPA', 'PCI-DSS'][Math.floor(Math.random() * 4)]
-  } compliance risk.`;
-
+export async function analyzeIssueWithGuardian(issueId: string): Promise<string> {
   const issue = mockScanResult.issues.find(i => i.id === issueId);
-  return issue?.explanation ?? fallback;
+  return issue?.explanation || "Analysis unavailable.";
 }
 
-// Guardian AI integration - generate fix
-export async function generateFixWithBob(issueId: string): Promise<{
+export async function generateFixWithGuardian(issueId: string): Promise<{
   fixedCode: string;
   explanation: string;
 }> {
@@ -81,31 +71,28 @@ export async function generateFixWithBob(issueId: string): Promise<{
     body: JSON.stringify({ issueId }),
   });
 
-  if (apiFix) {
-    return apiFix;
+  if (!apiFix) {
+    throw new Error("Failed to reach Execution Engine API for fix generation.");
   }
 
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  const issue = mockScanResult.issues.find(i => i.id === issueId);
-  return { fixedCode: issue?.fixedCode || '', explanation: issue?.explanation || '' };
+  return apiFix;
 }
 
-// Calculate new risk score after fixing issues
-export function calculateRiskScore(fixedIssueIds: string[]): number {
+export function calculateRiskScore(fixedIssueIds: string[], currentIssues: ConsentIssue[] = mockScanResult.issues): number {
   let score = 100;
   
-  mockScanResult.issues.forEach(issue => {
+  const deductions: Record<string, number> = { 
+    critical: 15, 
+    high: 10, 
+    medium: 5, 
+    low: 2 
+  };
+  
+  currentIssues.forEach(issue => {
     if (fixedIssueIds.includes(issue.id)) return;
     
-    // Deduct points based on severity
-    const deductions = {
-      critical: 15,
-      high: 10,
-      medium: 5,
-      low: 2,
-    };
-    
-    score -= deductions[issue.severity];
+    const weight = deductions[issue.severity as keyof typeof deductions] || 0;
+    score -= weight;
   });
   
   return Math.max(0, Math.min(100, score));

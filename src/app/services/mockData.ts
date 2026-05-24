@@ -46,7 +46,7 @@ export interface ScanResult {
 
 // Sample repository issues
 export const mockScanResult: ScanResult = {
-  projectName: "ecommerce-demo-app",
+  projectName: "TEST_LIVE_DATA",
   scannedAt: new Date(),
   totalFiles: 127,
   totalIssues: 13, // Updated to 13
@@ -1113,7 +1113,7 @@ The fix implements a "Revisit Consent" trigger:
 };
 
 // Guardian AI mock responses
-export const mockIBMBobExplanations = {
+export const mockGuardianAIExplanations = {
   analyze: (code: string, context: string) => {
     return `Guardian AI Analysis Complete:
 

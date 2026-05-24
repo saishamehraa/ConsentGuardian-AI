@@ -15,10 +15,10 @@ import {
   Activity,
   Shield,
   Loader2,
-  GitBranch, // <-- ADDED: Needed for the new CI/CD UI
+  GitBranch, 
   FileSearch
 } from 'lucide-react';
-import { generateFixWithBob } from '../services/scanService';
+import { generateFixWithGuardian } from '../services/scanService';
 import { CodeComparison } from '../components/CodeComparison';
 import { getScanSession, markIssueFixed, setScanResult } from '../services/scanSession';
 import { mockScanResult } from '../services/mockData';
@@ -89,7 +89,7 @@ export function IssueDetailPage() {
     setIsFixing(true);
     
     try {
-      const fix = await generateFixWithBob(issue.id);
+      const fix = await generateFixWithGuardian(issue.id);
       setGeneratedFix(fix);
       setShowFix(true);
     } catch (error) {
@@ -114,7 +114,8 @@ export function IssueDetailPage() {
     }
   };
 
-  const getCategoryLabel = (category: string) => {
+  const getCategoryLabel = (category?: string) => {
+    if (!category) return "Uncategorized"; // Fallback if missing
     return category.split('_').map(word => 
       word.charAt(0).toUpperCase() + word.slice(1)
     ).join(' ');

@@ -395,7 +395,7 @@ Recommendation: Implement consent management before any location tracking.
 2. **Click 'Try Demo'**: "Watch Guardian AI scan 127 files in real-time"
 3. **Dashboard appears**: "12 issues found, risk score 67/100 - High Risk"
 4. **Click critical issue**: "Location tracking without consent - GDPR Article 7 violation"
-5. **Show Guardian AI analysis**: "See how Bob explains the legal risk"
+5. **Show Guardian AI analysis**: "See how Guardian AI explains the legal risk"
 6. **Generate fix**: "One click generates compliant code"
 7. **Apply fix**: "Risk score jumps to 75 - instant improvement"
 

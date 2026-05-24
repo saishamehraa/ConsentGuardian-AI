@@ -1,5 +1,5 @@
-//src/app/routes.tsx
-import { createBrowserRouter } from "react-router";
+// src/app/routes.tsx
+import { createBrowserRouter } from "react-router-dom"; // <--- CHANGE THIS
 import { HomePage } from "./pages/HomePage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { IssueDetailPage } from "./pages/IssueDetailPage";
@@ -7,14 +7,14 @@ import { IssueDetailPage } from "./pages/IssueDetailPage";
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: HomePage,
+    element: <HomePage />,
   },
   {
     path: "/dashboard",
-    Component: DashboardPage,
+    element: <DashboardPage />,
   },
   {
     path: "/issue/:id",
-    Component: IssueDetailPage,
+    element: <IssueDetailPage />,
   },
 ]);

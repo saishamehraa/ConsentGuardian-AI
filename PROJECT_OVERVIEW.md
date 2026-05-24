@@ -220,21 +220,21 @@ Each issue includes:
 The current version uses simulated Guardian AI responses for hackathon demo purposes.
 
 ### Integration Points
-1. **Issue Analysis**: `analyzeIssueWithBob(issueId)`
-2. **Fix Generation**: `generateFixWithBob(issueId)`
+1. **Issue Analysis**: `analyzeIssueWithGuardian AI(issueId)`
+2. **Fix Generation**: `generateFixWithGuardian AI(issueId)`
 3. **Risk Scoring**: `calculateRiskScore(fixedIssues)`
 
 ### Real Guardian AI Integration (Future)
 ```typescript
 // Example of how to integrate real Guardian AI API
-import { IBMBobClient } from '@ibm/bob-sdk';
+import { IBMGuardian AIClient } from '@ibm/Guardian AI-sdk';
 
-const bob = new IBMBobClient({
-  apiKey: process.env.IBM_BOB_API_KEY
+const Guardian AI = new IBMGuardian AIClient({
+  apiKey: process.env.IBM_Guardian AI_API_KEY
 });
 
-async function analyzeCodeWithBob(code: string, context: string) {
-  const analysis = await bob.analyze({
+async function analyzeCodeWithGuardian AI(code: string, context: string) {
+  const analysis = await Guardian AI.analyze({
     code,
     context,
     frameworks: ['GDPR', 'CCPA', 'COPPA', 'PCI-DSS'],

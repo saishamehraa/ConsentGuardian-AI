@@ -19,6 +19,7 @@ export function HomePage() {
     if (!repoUrl.trim()) return;
 
     setIsScanning(true);
+    setScanProgress({ stage: 'starting', progress: 0, message: 'Initializing scan...' });
     
     try {
       const result = await scanRepository(repoUrl, (progress) => {
@@ -33,6 +34,8 @@ export function HomePage() {
     } catch (error) {
       console.error('Scan failed:', error);
       setIsScanning(false);
+      // ---> Simple UI feedback on failure <---
+      alert("Scan failed: Could not connect to the backend server. Make sure 'npm run dev:api' is running.");
     }
   };
 
