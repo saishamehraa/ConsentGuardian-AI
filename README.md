@@ -13,7 +13,7 @@
 ## AI Issue Detection & Risk Analysis
 ![Issue Analysis](./assets/jpg2.png)
 
-## AI-Powered Code Remediation
+##  Data Flow Analysis Visualization
 ![Data Flow Analysis](./assets/jpg3.png)
 
 ---
