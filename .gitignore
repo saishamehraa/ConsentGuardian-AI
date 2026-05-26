@@ -8,3 +8,4 @@ build/
 /server/dist/
 server/build/
 server/.env
+tmp/

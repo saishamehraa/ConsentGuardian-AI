@@ -1,6 +1,6 @@
 // src/app/pages/DashboardPage.tsx
 import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
@@ -24,7 +24,7 @@ import {
 } from 'lucide-react';
 import { DataFlowChart } from '../components/DataFlowChart';
 import { IssuesList } from '../components/IssuesList';
-import { getScanSession, setScanResult } from '../services/scanSession';
+import { getScanSession } from '../services/scanSession';
 
 export function DashboardPage() {
   const navigate = useNavigate();
@@ -53,7 +53,6 @@ export function DashboardPage() {
             <Button 
               variant="outline"
               onClick={() => {
-                // setScanResult(scanResult); // This was previously causing an error as scanResult wasn't defined here
                 window.location.reload();
               }}
               className="w-full border-slate-700 text-slate-300 hover:bg-slate-800"
@@ -334,11 +333,20 @@ const scanResult = sessionData?.scanResult;
                 Guardian AI analyzes your codebase against GDPR, CCPA, COPPA, and PCI-DSS compliance requirements.
               </p>
               <div className="flex gap-3">
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                <Button 
+                  size="sm" 
+                  className="bg-blue-600 hover:bg-blue-700"
+                  onClick={() => alert("Guardian AI is an advanced compliance engine that uses local LLMs to analyze Abstract Syntax Trees for GDPR, CCPA, and PCI-DSS violations.")}
+                >
                   <Zap className="h-4 w-4 mr-2" />
                   Learn More About Guardian AI
                 </Button>
-                <Button size="sm" variant="outline" className="border-slate-700 text-slate-300">
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  className="border-slate-700 text-slate-300"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
                   <Eye className="h-4 w-4 mr-2" />
                   View Analysis Details
                 </Button>

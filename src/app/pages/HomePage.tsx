@@ -1,6 +1,6 @@
-//src/app/pages/HomePage.tsx
+// src/app/pages/HomePage.tsx
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
@@ -34,14 +34,8 @@ export function HomePage() {
     } catch (error) {
       console.error('Scan failed:', error);
       setIsScanning(false);
-      // ---> Simple UI feedback on failure <---
       alert("Scan failed: Could not connect to the backend server. Make sure 'npm run dev:api' is running.");
     }
-  };
-
-  const handleDemoScan = () => {
-    setRepoUrl('https://github.com/demo/ecommerce-app');
-    setTimeout(() => handleScan(), 100);
   };
 
   return (
@@ -57,9 +51,6 @@ export function HomePage() {
               <h1 className="font-bold text-white">Consent Guardian AI</h1>
               <p className="text-xs text-slate-400">Powered by Guardian AI</p>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-400">Guardian AI Hackathon 2026</span>
           </div>
         </div>
       </header>
@@ -83,33 +74,23 @@ export function HomePage() {
           {/* Scan Input */}
           <Card className="bg-slate-900/50 border-slate-800 p-8 mb-12">
             {!isScanning ? (
-              <>
-                <div className="flex gap-3 mb-4">
-                  <Input
-                    placeholder="Enter GitHub repository URL or paste code..."
-                    value={repoUrl}
-                    onChange={(e) => setRepoUrl(e.target.value)}
-                    className="bg-slate-950 border-slate-700 text-white text-lg h-14"
-                    onKeyDown={(e) => e.key === 'Enter' && handleScan()}
-                  />
-                  <Button 
-                    onClick={handleScan}
-                    className="h-14 px-8 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
-                    disabled={!repoUrl.trim()}
-                  >
-                    <FileSearch className="h-5 w-5 mr-2" />
-                    Scan Project
-                  </Button>
-                </div>
-                <Button
-                  variant="outline"
-                  onClick={handleDemoScan}
-                  className="border-slate-700 text-slate-300 hover:bg-slate-800"
+              <div className="flex gap-3">
+                <Input
+                  placeholder="Enter GitHub repository URL..."
+                  value={repoUrl}
+                  onChange={(e) => setRepoUrl(e.target.value)}
+                  className="bg-slate-950 border-slate-700 text-white text-lg h-14"
+                  onKeyDown={(e) => e.key === 'Enter' && handleScan()}
+                />
+                <Button 
+                  onClick={handleScan}
+                  className="h-14 px-8 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                  disabled={!repoUrl.trim()}
                 >
-                  <Code2 className="h-4 w-4 mr-2" />
-                  Try Demo Repository
+                  <FileSearch className="h-5 w-5 mr-2" />
+                  Scan Project
                 </Button>
-              </>
+              </div>
             ) : (
               <div className="py-8">
                 <div className="mb-4">
@@ -188,40 +169,6 @@ export function HomePage() {
           <div>
             <div className="text-4xl font-bold text-white mb-2">100%</div>
             <div className="text-sm text-slate-400">AI-Powered Fixes</div>
-          </div>
-        </div>
-
-        {/* How it Works */}
-        <div className="max-w-4xl mx-auto mt-20">
-          <h3 className="text-2xl font-bold text-white text-center mb-12">How It Works</h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="h-16 w-16 rounded-full bg-blue-500/10 border-2 border-blue-500/30 flex items-center justify-center mx-auto mb-4">
-                <GitBranch className="h-8 w-8 text-blue-400" />
-              </div>
-              <h4 className="font-semibold text-white mb-2">1. Connect Repo</h4>
-              <p className="text-sm text-slate-400">
-                Link your GitHub repository or paste code directly
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="h-16 w-16 rounded-full bg-purple-500/10 border-2 border-purple-500/30 flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8 text-purple-400" />
-              </div>
-              <h4 className="font-semibold text-white mb-2">2. AI Analysis</h4>
-              <p className="text-sm text-slate-400">
-                Guardian AI scans for privacy violations and consent gaps
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="h-16 w-16 rounded-full bg-green-500/10 border-2 border-green-500/30 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="h-8 w-8 text-green-400" />
-              </div>
-              <h4 className="font-semibold text-white mb-2">3. Auto-Fix</h4>
-              <p className="text-sm text-slate-400">
-                Generate compliant code with one click
-              </p>
-            </div>
           </div>
         </div>
       </div>
