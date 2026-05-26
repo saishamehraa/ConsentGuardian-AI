@@ -203,7 +203,7 @@ Final scores are categorized into:
 - AI remediation generation
 - Dashboard analytics visualization
 
-➡️ [View Detailed Architecture Documentation](./architecture.md)
+➡️ [View Detailed Architecture Documentation](./ARCHITECTURE.md)
 
 ---
 
