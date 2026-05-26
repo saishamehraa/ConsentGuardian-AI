@@ -57,7 +57,9 @@ export async function scanCodeWithOllama(files) {
     try {
       const response = await fetch(`${baseUrl}/chat/completions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true" // For local testing with ngrok, if needed
+         },
         body: JSON.stringify({
           model: model,
           messages: [{ role: "user", content: prompt }],
