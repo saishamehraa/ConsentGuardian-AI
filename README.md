@@ -8,13 +8,13 @@
 # 📸 Product Screenshots
 
 ## Dashboard Overview
-![Dashboard](./assets/jpg1.jpg)
+![Dashboard](./assets/jpg1.png)
 
 ## AI Issue Detection & Risk Analysis
-![Issue Analysis](./assets/jpg2.jpg)
+![Issue Analysis](./assets/jpg2.png)
 
 ## AI-Powered Code Remediation
-![AI Fix Generation](./assets/jpg3.jpg)
+![Data Flow Analysis](./assets/jpg3.png)
 
 ---
 
