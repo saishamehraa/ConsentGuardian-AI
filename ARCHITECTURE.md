@@ -2,9 +2,9 @@
 
 > AI-Native Privacy Governance Platform for Modern Software Systems
 
-# ======================================================
+---
+
 ## 📚 Document Sections
-# ======================================================
 
 - [Architecture Overview](#-architecture-overview)
 - [High-Level Architecture Flow](#-high-level-architecture-flow)
@@ -16,9 +16,9 @@
 - [Future Expansion](#-future-architecture-expansion)
 - [Architectural Philosophy](#-architectural-philosophy)
 
-# =======================================================
+---
+
 # 📌 Architecture Overview
-# =======================================================
 
 Consent Guardian AI is built as a modular AI-powered privacy analysis pipeline that scans repositories, semantically detects compliance violations using Local LLMs, calculates consent risks, and generates automated remediation suggestions.
 
@@ -30,15 +30,15 @@ The architecture is designed for:
 * privacy-first analysis
 * extensible compliance intelligence
 
-# ====================================================
+---
+
 # 🧠 High-Level Architecture Flow
-# ====================================================
 
 ![System Architecture](./assets/architecture.png)
 
-# ====================================================
+---
+
 # 🛠️ Architecture Technology Stack
-# ====================================================
 
 | Layer | Technologies |
 |---|---|
@@ -49,9 +49,9 @@ The architecture is designed for:
 | Parsing Engine | simple-git, fs, AST utilities |
 | Visualization | Recharts, shadcn/ui |
 
-# =======================================================
+---
+
 # ⚙️ Core System Components
-# =======================================================
 
 # 1️⃣ Frontend Layer
 
@@ -290,9 +290,9 @@ Supports:
 * risk progression
 * compliance reporting
 
-# ===========================================================
+---
+
 # 🔄 End-to-End Execution Flow
-# ===========================================================
 
 ```text
 1. Developer submits repository
@@ -314,9 +314,8 @@ Supports:
 9. Dashboard visualizes findings & compliance insights
 ```
 
-# ====================================================
+---
 # 🔐 Security Architecture
-# ====================================================
 
 ## Privacy-First AI Execution
 
@@ -329,9 +328,8 @@ This ensures:
 * enterprise-safe analysis
 * reduced third-party exposure
 
-# ==========================================================
+---
 # 🔒 Data Flow Security Model
-# ==========================================================
 
 Consent Guardian AI follows a privacy-first execution model where:
 
@@ -343,9 +341,8 @@ Consent Guardian AI follows a privacy-first execution model where:
 
 This architecture minimizes third-party exposure risks while supporting enterprise-safe AI workflows.
 
-# =====================================================
+---
 # 🧱 Scalability Design
-# =====================================================
 
 The architecture is modular and horizontally extensible.
 
@@ -357,9 +354,9 @@ Future scalability includes:
 * async scan queues
 * real-time streaming analysis
 
-# =============================================================
+---
 # 🛡️ Threat Model Considerations
-# =============================================================
+
 Consent Guardian AI is designed to mitigate:
 
 - accidental privacy violations
@@ -369,9 +366,8 @@ Consent Guardian AI is designed to mitigate:
 - hidden tracking persistence
 - compliance drift in CI/CD pipelines
 
-# ====================================================
+---
 # 🔌 CI/CD Integration Architecture
-# ====================================================
 
 ```text
 GitHub Pull Request
@@ -387,9 +383,9 @@ Automated Remediation Suggestions
 Optional Merge Blocking Policies
 ```
 
-# =============================================
+---
+
 # 📌 Key Architectural Decisions
-# =============================================
 
 | Decision | Reason |
 |---|---|
@@ -399,9 +395,8 @@ Optional Merge Blocking Policies
 | MongoDB storage | Flexible findings schema |
 | Express API orchestration | Lightweight service coordination |
 
-# ======================================================
+---
 # 🚀 Future Architecture Expansion
-# ======================================================
 
 ## Planned Capabilities
 
@@ -423,9 +418,8 @@ Optional Merge Blocking Policies
 * audit exports
 * compliance trend forecasting
 
-# ====================================================
+---
 # 🧠 Architectural Philosophy
-# ====================================================
 
 Consent Guardian AI is designed around four core principles:
 
@@ -445,9 +439,8 @@ Compliance workflows should integrate naturally into software delivery pipelines
 
 The system should scale from individual repositories to organizational governance infrastructure.
 
-# =========================================================
+---
 # 🌐 Long-Term Platform Vision
-# =========================================================
 
 Consent Guardian AI aims to become an autonomous AI governance layer for modern software ecosystems.
 
