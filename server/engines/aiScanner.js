@@ -1,5 +1,5 @@
 // server/engines/aiScanner.js
-import { randomUUID } from 'crypto';
+import { randomUUID } from 'node:crypto';
 
 export async function scanCodeWithOllama(files) {
   const baseUrl = process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434/v1";
@@ -7,35 +7,51 @@ export async function scanCodeWithOllama(files) {
   
   let detectedIssues = [];
 
-  // MVP Optimization: Only scan files that contain privacy-related keywords
+  // OPTIMIZATION: Only scan files that contain privacy-related keywords.
+  // This saves massive amounts of time and prevents cloud timeout errors.
   const keywords = ['geolocation', 'cookie', 'localStorage', 'fetch', 'axios', 'payment', 'email', 'tracking', 'password'];
-  const suspiciousFiles = files.filter(f => keywords.some(k => f.content.includes(k))).slice(0, 3); // Limit to 3 for demo speed
+  
+  // Filter by keywords, then slice to a maximum of 5 files to ensure the scan finishes quickly
+  const suspiciousFiles = files
+    .filter(f => keywords.some(k => f.content.includes(k)))
+    .slice(0, 5); 
 
   console.log(`🧠 AI Scanner analyzing ${suspiciousFiles.length} suspicious files...`);
 
+  // HELPER: Force-extract JSON even if the AI wraps it in markdown or chatty text
+  function extractJson(str) {
+    const match = str.match(/\[[\s\S]*\]/); // Look for anything between [ and ]
+    return match ? match[0] : "[]";
+  }
+
   for (const file of suspiciousFiles) {
-    console.log(`🔍 Scanning: ${file.file}`);
+    console.log(`🔍 AI Scanning: ${file.file}`);
     
+    // STRICT PROMPT: Demanding a JSON array to prevent parsing crashes
     const prompt = `
-      You are an expert AI security architect specializing in privacy compliance (GDPR, CCPA).
-      Analyze the following code. If you find a privacy violation (e.g., missing consent, tracking, plaintext data logging), output a JSON array containing the issue. If the code is safe, output an empty array [].
+      You are a privacy compliance API.
+      Analyze this code for GDPR/CCPA violations (missing consent, tracking, plaintext data logging).
       
-      Output ONLY valid JSON matching this exact structure:
-      [{
-        "title": "Short title of the issue",
-        "severity": "critical", // or "high", "medium", "low"
-        "category": "missing_consent", // or "unsafe_usage", "hidden_collection"
-        "description": "Brief description of the violation",
-        "affectedCode": "The specific 3-4 lines of code causing the issue",
-        "explanation": "Detailed explanation of why this violates GDPR/CCPA",
-        "impact": "Potential fines or business impact",
-        "recommendation": "How to fix it"
-      }]
+      CRITICAL: You must respond with ONLY a raw JSON array. 
+      No markdown, no "Output:", no conversational text.
+      If the code is perfectly safe, return an empty array: []
+      
+      [
+        {
+          "title": "Short title of the issue",
+          "severity": "critical", 
+          "category": "missing_consent", 
+          "description": "Brief description of the violation",
+          "affectedCode": "The specific 3-4 lines of code causing the issue",
+          "explanation": "Why this violates GDPR/CCPA",
+          "impact": "Potential fines or business impact",
+          "recommendation": "How to fix it"
+        }
+      ]
 
       Code File: ${file.file}
-      \`\`\`
-      ${file.content.substring(0, 2000)} // Truncated for context window
-      \`\`\`
+      Content:
+      ${file.content.substring(0, 2000)}
     `;
 
     try {
@@ -45,18 +61,20 @@ export async function scanCodeWithOllama(files) {
         body: JSON.stringify({
           model: model,
           messages: [{ role: "user", content: prompt }],
-          temperature: 0.1,
+          temperature: 0.1, // Low temperature for analytical consistency
         })
       });
 
       const data = await response.json();
+      
+      if (!data.choices || !data.choices[0]) {
+          console.log(`⚠️ No response from AI for ${file.file}`);
+          continue;
+      }
+
       let content = data.choices[0].message.content.trim();
-
-      // Clean up markdown wrapping from LLM
-      if (content.startsWith('```json')) content = content.replace(/^```json\n/, '').replace(/\n```$/, '');
-      else if (content.startsWith('```')) content = content.replace(/^```\n/, '').replace(/\n```$/, '');
-
-      const parsed = JSON.parse(content);
+      const cleanJson = extractJson(content); 
+      const parsed = JSON.parse(cleanJson);
       
       // Map the AI response into our expected ConsentIssue structure
       if (Array.isArray(parsed) && parsed.length > 0) {
@@ -65,7 +83,7 @@ export async function scanCodeWithOllama(files) {
             id: randomUUID(),
             title: issue.title || "Privacy Violation Detected",
             file: file.file,
-            line: 1, // Simplifying line number for now
+            line: 1, 
             severity: issue.severity || "medium",
             category: issue.category || "unsafe_usage",
             description: issue.description || "Potential compliance risk found.",
