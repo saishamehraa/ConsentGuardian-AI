@@ -467,7 +467,7 @@ Consent Guardian AI aims to become an autonomous AI governance layer for modern 
 
 # 📄 License
 
-![LICENSE](./license.md)
+![LICENSE](./LICENSE)
 
 ---
 
