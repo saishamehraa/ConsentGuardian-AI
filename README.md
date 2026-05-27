@@ -3,6 +3,28 @@
 
 > Automatically scan repositories, detect privacy violations, analyze consent risks, and generate AI-powered compliance fixes using Local LLMs.
 
+<p align="center">
+
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB_Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white)
+
+![AI Powered](https://img.shields.io/badge/AI-Powered-purple?style=for-the-badge)
+![Privacy First](https://img.shields.io/badge/Privacy-First-blue?style=for-the-badge)
+![Local LLMs](https://img.shields.io/badge/Local-LLMs-green?style=for-the-badge)
+![DevSecOps](https://img.shields.io/badge/DevSecOps-Security-red?style=for-the-badge)
+![GDPR](https://img.shields.io/badge/GDPR-Compliant-success?style=for-the-badge)
+![CCPA](https://img.shields.io/badge/CCPA-Ready-orange?style=for-the-badge)
+
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Prototype-success?style=for-the-badge)
+![Made With Love](https://img.shields.io/badge/Made%20With-Privacy%20Intelligence-ff69b4?style=for-the-badge)
+
+</p>
+
 ---
 
 # 📸 Product Screenshots
