@@ -13,11 +13,11 @@ export function PredictiveCompliancePage() {
     return () => clearInterval(interval);
   }, []);
 
-  const riskScore = session?.scanResult?.riskScore || 0;
+  const riskScore = session?.scanResult?.riskScore ?? 100;
   
-  // Calculate mock current compliance (inverse of risk)
-  const currentCompliance = Math.max(0, 100 - riskScore);
-  const currentExposure = riskScore;
+  // `riskScore` from the backend is actually a compliance score (100 = perfect).
+  const currentCompliance = riskScore;
+  const currentExposure = Math.max(0, 100 - riskScore);
 
   // Generate dynamic forecast based on current risk
   const isDeteriorating = currentCompliance < 80;

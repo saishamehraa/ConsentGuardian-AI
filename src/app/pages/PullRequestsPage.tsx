@@ -22,11 +22,11 @@ export function PullRequestsPage() {
 
   const issues = session?.scanResult?.issues || [];
   
-  // Dynamically generate mock PRs based on the live scan issues
   const generatedPRs = issues.slice(0, 3).map((issue, index) => {
     const isFix = index % 2 === 0; // Alternate between fixes and regressions
     return {
       id: 140 + index,
+      issueId: issue.id,
       title: isFix ? `fix: resolve privacy issue in ${issue.file}` : `feat: update tracking in ${issue.file}`,
       author: isFix ? 'security-bot' : 'dev-team',
       status: isFix ? 'approved' : (issue.severity === 'critical' ? 'blocked' : 'warning'),
@@ -40,6 +40,7 @@ export function PullRequestsPage() {
   if (generatedPRs.length === 0) {
     generatedPRs.push({
       id: 100,
+      issueId: '',
       title: 'chore: initial repository setup',
       author: 'admin',
       status: 'approved',
@@ -102,7 +103,7 @@ export function PullRequestsPage() {
                 </div>
                 
                 <button 
-                  onClick={() => navigate(`/dashboard/copilot`)}
+                  onClick={() => pr.issueId ? navigate(`/dashboard/issue/${pr.issueId}`) : window.alert('Detailed report available only for recent issues.')}
                   className={cn(
                   "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
                   pr.status === 'blocked' ? "bg-red-500/20 text-red-400 hover:bg-red-500/30" :

@@ -10,6 +10,7 @@ import { CopilotPage } from "./pages/CopilotPage";
 import { PullRequestsPage } from "./pages/PullRequestsPage";
 import { PredictiveCompliancePage } from "./pages/PredictiveCompliancePage";
 import { ReportsPage } from "./pages/ReportsPage";
+import { IssueDetailPage } from "./pages/IssueDetailPage";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
       { path: "pull-requests", element: <PullRequestsPage /> },
       { path: "predictive", element: <PredictiveCompliancePage /> },
       { path: "reports", element: <ReportsPage /> },
+      { path: "issue/:id", element: <IssueDetailPage /> },
     ],
   },
 ]);
