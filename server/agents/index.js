@@ -62,6 +62,7 @@ export const runDataFlowIntelligenceAgent = async (files, issues) => {
   issues.forEach((issue, idx) => {
     dcp.push({
       id: `dcp-issue-${idx}`,
+      issueId: issue.id,
       type: "violation",
       dataType: issue.title.split(' ').slice(0, 3).join(' '), // e.g. "Unencrypted PII"
       file: issue.file,
@@ -75,7 +76,7 @@ export const runDataFlowIntelligenceAgent = async (files, issues) => {
   dcp = dcp.map(point => {
     const relatedIssue = issues.find(i => i.file === point.file);
     if (relatedIssue && point.type !== 'violation') {
-      return { ...point, riskLevel: relatedIssue.severity, hasConsent: false };
+      return { ...point, riskLevel: relatedIssue.severity, hasConsent: false, issueId: relatedIssue.id };
     }
     return point;
   });

@@ -36,17 +36,20 @@ export function ComplianceHeatmap() {
     issues.forEach((issue: any) => {
       let penalty = issue.severity === 'critical' ? 25 : issue.severity === 'high' ? 15 : 5;
       
+      const cat = (issue.category || '').toLowerCase();
+      const title = (issue.title || '').toLowerCase();
+
       // Match issue category to domains
-      if (domain === 'User Consent' && issue.category === 'missing_consent') {
+      if (domain === 'User Consent' && (cat === 'missing_consent' || cat === 'expired_consent' || title.includes('consent'))) {
         baseScore -= penalty;
       }
-      if (domain === 'Third-party Sharing' && (issue.category === 'missing_consent' || issue.title.toLowerCase().includes('third-party'))) {
+      if (domain === 'Third-party Sharing' && (cat === 'missing_consent' || cat === 'hidden_collection' || title.includes('third-party') || title.includes('sharing'))) {
         baseScore -= penalty;
       }
-      if (domain === 'Storage Security' && (issue.category === 'unsafe_usage' || issue.title.toLowerCase().includes('encrypt'))) {
+      if (domain === 'Storage Security' && (cat === 'unsafe_usage' || cat === 'data_storage_security' || cat === 'plaintext_data_logging' || title.includes('encrypt') || title.includes('storage') || title.includes('key'))) {
         baseScore -= penalty;
       }
-      if (domain === 'Data Collection' && (issue.category === 'tracking' || issue.category === 'missing_consent')) {
+      if (domain === 'Data Collection' && (cat === 'tracking' || cat === 'missing_consent' || cat === 'data_logging' || title.includes('tracking') || title.includes('collection'))) {
         baseScore -= penalty;
       }
     });

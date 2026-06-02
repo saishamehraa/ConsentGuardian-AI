@@ -11,6 +11,7 @@ import { PullRequestsPage } from "./pages/PullRequestsPage";
 import { PredictiveCompliancePage } from "./pages/PredictiveCompliancePage";
 import { ReportsPage } from "./pages/ReportsPage";
 import { IssueDetailPage } from "./pages/IssueDetailPage";
+import { SettingsPage } from "./pages/SettingsPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
       { path: "predictive", element: <PredictiveCompliancePage /> },
       { path: "reports", element: <ReportsPage /> },
       { path: "issue/:id", element: <IssueDetailPage /> },
+      { path: "settings", element: <SettingsPage /> },
     ],
   },
 ]);

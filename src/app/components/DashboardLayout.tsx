@@ -99,12 +99,14 @@ export function DashboardLayout() {
               </span>
             </div>
           </div>
-          
-          <button onClick={() => window.alert('Settings panel coming soon')} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors mt-1">
+          <button onClick={() => navigate('/dashboard/settings')} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors mt-1">
             <Settings className="w-4 h-4" />
             Settings
           </button>
-          <button onClick={() => navigate('/')} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-red-400 hover:bg-red-400/10 transition-colors mt-1">
+          <button onClick={() => {
+            window.localStorage.removeItem('consent-guardian-session');
+            navigate('/');
+          }} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-red-400 hover:bg-red-400/10 transition-colors mt-1">
             <LogOut className="w-4 h-4" />
             Disconnect
           </button>

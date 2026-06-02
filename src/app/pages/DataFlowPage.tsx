@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { User, Server, Database, Cloud, AlertTriangle, ArrowRight, ShieldAlert, ShieldCheck } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -9,6 +11,7 @@ function cn(...inputs: ClassValue[]) {
 }
 
 export function DataFlowPage() {
+  const navigate = useNavigate();
   const [session, setSession] = useState(getScanSession());
   const [activeNode, setActiveNode] = useState<string | null>(null);
 
@@ -25,6 +28,7 @@ export function DataFlowPage() {
   // We'll generate a source, processing, and storage node for each collection point to make a graph
   const generatedNodes = dcp.length > 0 ? dcp.map((point: any, idx: number) => ({
     id: point.id,
+    issueId: point.issueId,
     label: point.dataType,
     type: 'collection',
     status: point.riskLevel === 'critical' ? 'critical' : ['high', 'medium'].includes(point.riskLevel) ? 'warning' : 'secure',
@@ -35,8 +39,8 @@ export function DataFlowPage() {
       { label: 'Data Type', value: point.dataType },
     ]
   })) : [
-    { id: '1', label: 'Client App', type: 'source', status: 'secure', icon: User, details: [] },
-    { id: '2', label: 'API Gateway', type: 'processing', status: 'secure', icon: Server, details: [] }
+    { id: '1', issueId: undefined, label: 'Client App', type: 'source', status: 'secure', icon: User, details: [] },
+    { id: '2', issueId: undefined, label: 'API Gateway', type: 'processing', status: 'secure', icon: Server, details: [] }
   ];
 
   const NODES = generatedNodes;
@@ -48,12 +52,21 @@ export function DataFlowPage() {
         <p className="text-muted-foreground">Interactive mapping of PII movement and third-party data sharing.</p>
       </div>
 
-      <div className="flex-1 bg-card/40 backdrop-blur-xl border border-white/5 rounded-2xl relative overflow-hidden flex items-center justify-center p-8">
+      <div className="flex-1 bg-card/40 backdrop-blur-xl border border-white/5 rounded-2xl relative overflow-hidden flex items-center justify-center">
         {/* Background grid pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTU5LjUgMGguNXY2MEgwaC0uNXYuNWg2MFYwWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=')] opacity-50" />
         
-        <div className="relative z-10 flex flex-wrap md:flex-row items-center justify-center gap-4 md:gap-8 w-full max-w-5xl">
-          {NODES.map((node: any, index: number) => (
+        <TransformWrapper
+          initialScale={1}
+          minScale={0.2}
+          maxScale={4}
+          centerOnInit={true}
+          wheel={{ step: 0.1 }}
+          pinch={{ step: 5 }}
+        >
+          <TransformComponent wrapperClass="w-full h-full" contentClass="w-full h-full flex items-center justify-center p-8 min-w-max min-h-max">
+            <div className="relative z-10 flex flex-wrap md:flex-row items-center justify-center gap-4 md:gap-8 min-w-[800px] py-16">
+              {NODES.map((node: any, index: number) => (
             <React.Fragment key={node.id}>
               <button 
                 onClick={() => setActiveNode(node.id)}
@@ -97,9 +110,11 @@ export function DataFlowPage() {
               )}
             </React.Fragment>
           ))}
-        </div>
+            </div>
+          </TransformComponent>
+        </TransformWrapper>
 
-        {/* Node Detail Panel */}
+        {/* Node Detail Panel (Outside of pan/zoom so it stays fixed!) */}
         {activeNode && (
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl bg-black/90 backdrop-blur-2xl border border-indigo-500/50 rounded-2xl p-6 shadow-[0_20px_60px_rgba(0,0,0,0.8)] animate-in slide-in-from-bottom-8 z-50">
             <div className="flex justify-between items-start mb-4">
@@ -133,7 +148,14 @@ export function DataFlowPage() {
                     <h4 className={cn("font-medium mb-1", NODES.find((n: any) => n.id === activeNode)?.status === 'critical' ? "text-red-400" : "text-yellow-400")}>Privacy Risk Detected</h4>
                     <p className="text-sm text-gray-300">Data collection point lacks valid consent or is exposed.</p>
                     <button 
-                      onClick={() => window.alert('Navigating to AI Copilot to generate remediation...')}
+                      onClick={() => {
+                        const node = NODES.find((n: any) => n.id === activeNode);
+                        if (node?.issueId) {
+                          navigate(`/dashboard/issue/${node.issueId}`);
+                        } else {
+                          navigate('/dashboard/copilot');
+                        }
+                      }}
                       className={cn(
                         "mt-3 text-xs text-white px-3 py-1.5 rounded-lg transition-colors",
                         NODES.find((n: any) => n.id === activeNode)?.status === 'critical' ? "bg-red-500 hover:bg-red-600" : "bg-yellow-500 hover:bg-yellow-600"
