@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GitPullRequest, GitMerge, AlertCircle, CheckCircle, ShieldAlert, ArrowRight } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -9,6 +10,7 @@ function cn(...inputs: ClassValue[]) {
 }
 
 export function PullRequestsPage() {
+  const navigate = useNavigate();
   const [session, setSession] = useState(getScanSession());
 
   useEffect(() => {
@@ -99,7 +101,9 @@ export function PullRequestsPage() {
                   {pr.impact}
                 </div>
                 
-                <button className={cn(
+                <button 
+                  onClick={() => navigate(`/dashboard/copilot`)}
+                  className={cn(
                   "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
                   pr.status === 'blocked' ? "bg-red-500/20 text-red-400 hover:bg-red-500/30" :
                   pr.status === 'warning' ? "bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30" :

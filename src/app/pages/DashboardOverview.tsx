@@ -151,9 +151,9 @@ export function DashboardOverview() {
           <h3 className="text-lg font-semibold text-white mb-4">Active Agents</h3>
           <div className="space-y-4">
             {[
-              { name: 'Privacy Detection Agent', status: 'Analysis Complete', progress: 100 },
-              { name: 'Data Flow Intelligence', status: 'Mapping Graph', progress: 100 },
-              { name: 'Regulatory Mapping', status: 'Generating Heatmap', progress: 100 },
+              { name: 'Privacy Detection Agent', status: issues.length > 0 ? `Identified ${issues.length} Issues` : 'Analysis Complete', progress: 100 },
+              { name: 'Data Flow Intelligence', status: session?.scanResult?.dataCollectionPoints?.length ? 'Data Flow Mapped' : 'Analysis Complete', progress: 100 },
+              { name: 'Regulatory Mapping', status: 'Compliance Calculated', progress: 100 },
             ].map((agent, i) => (
               <div key={i} className="space-y-2">
                 <div className="flex justify-between text-sm">

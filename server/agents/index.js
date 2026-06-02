@@ -9,18 +9,9 @@ export const runPrivacyDetectionAgent = async (files) => {
     console.log("⚠️ AI fetch failed completely.");
   }
 
-  // FALLBACK if no issues found to keep dashboard populated
+  // If 0 issues are found, we return an empty array to reflect a clean repository.
   if (liveIssues.length === 0) {
-    console.log("⚠️ 0 Issues returned from AI. Injecting fallback demo data based on scanned files.");
-    const shuffled = [...mockScanResult.issues].sort(() => 0.5 - Math.random());
-    liveIssues = shuffled.slice(0, Math.min(4, Math.max(1, files.length % 5))); 
-    
-    // Attempt to map fallback issues to actual files if any exist
-    if (files.length > 0) {
-      liveIssues.forEach((issue, idx) => {
-        issue.file = files[idx % files.length].file;
-      });
-    }
+    console.log("✅ 0 Issues returned from AI. Repository appears clean.");
   }
   return liveIssues;
 };

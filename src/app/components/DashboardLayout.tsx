@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Network, 
@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { getScanSession } from '../services/scanSession';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,6 +32,17 @@ const navItems = [
 
 export function DashboardLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [session, setSession] = useState(getScanSession());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSession(getScanSession());
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const projectName = session?.scanResult?.projectName || 'custom-scan';
 
   return (
     <div className="flex h-screen w-full bg-background text-foreground overflow-hidden">
@@ -80,7 +92,7 @@ export function DashboardLayout() {
               <Github className="w-4 h-4 text-white" />
             </div>
             <div className="flex flex-col flex-1 overflow-hidden">
-              <span className="text-sm font-medium truncate">acme-corp/ecommerce</span>
+              <span className="text-sm font-medium truncate" title={projectName}>{projectName}</span>
               <span className="text-xs text-emerald-400 truncate flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Active Scan
@@ -88,11 +100,11 @@ export function DashboardLayout() {
             </div>
           </div>
           
-          <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors mt-1">
+          <button onClick={() => window.alert('Settings panel coming soon')} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors mt-1">
             <Settings className="w-4 h-4" />
             Settings
           </button>
-          <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-red-400 hover:bg-red-400/10 transition-colors mt-1">
+          <button onClick={() => navigate('/')} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-red-400 hover:bg-red-400/10 transition-colors mt-1">
             <LogOut className="w-4 h-4" />
             Disconnect
           </button>
