@@ -78,6 +78,20 @@ export async function generateFixWithGuardian(issueId: string): Promise<{
   return apiFix;
 }
 
+export async function chatWithGuardian(message: string, history: any[], contextIssues: any[]): Promise<string> {
+  const response = await tryApiFetch<{ reply: string }>('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, history, contextIssues }),
+  });
+
+  if (!response) {
+    throw new Error("Failed to reach Copilot AI backend.");
+  }
+
+  return response.reply;
+}
+
 export function calculateRiskScore(fixedIssueIds: string[], currentIssues: ConsentIssue[] = mockScanResult.issues): number {
   let score = 100;
   

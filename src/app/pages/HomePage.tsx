@@ -80,36 +80,18 @@ export function HomePage() {
                   value={repoUrl}
                   onChange={(e) => setRepoUrl(e.target.value)}
                   className="bg-slate-950 border-slate-700 text-white text-lg h-14"
-                  onKeyDown={(e) => e.key === 'Enter' && handleScan()}
+                  onKeyDown={(e) => e.key === 'Enter' && navigate('/onboarding', { state: { repoUrl } })}
                 />
                 <Button 
-                  onClick={handleScan}
+                  onClick={() => navigate('/onboarding', { state: { repoUrl } })}
                   className="h-14 px-8 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
                   disabled={!repoUrl.trim()}
                 >
                   <FileSearch className="h-5 w-5 mr-2" />
-                  Scan Project
+                  Connect & Scan
                 </Button>
               </div>
-            ) : (
-              <div className="py-8">
-                <div className="mb-4">
-                  <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300"
-                      style={{ width: `${scanProgress?.progress || 0}%` }}
-                    />
-                  </div>
-                </div>
-                <p className="text-slate-300 flex items-center justify-center gap-2">
-                  <Sparkles className="h-5 w-5 text-blue-400 animate-pulse" />
-                  {scanProgress?.message || 'Initializing...'}
-                </p>
-                <p className="text-sm text-slate-500 mt-2">
-                  Guardian AI is analyzing your codebase for privacy compliance
-                </p>
-              </div>
-            )}
+            ) : null}
           </Card>
         </div>
 

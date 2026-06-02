@@ -1,8 +1,15 @@
 // src/app/routes.tsx
-import { createBrowserRouter } from "react-router-dom"; // <--- CHANGE THIS
+import { createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
-import { DashboardPage } from "./pages/DashboardPage";
-import { IssueDetailPage } from "./pages/IssueDetailPage";
+import { DashboardLayout } from "./components/DashboardLayout";
+import { OnboardingPage } from "./pages/OnboardingPage";
+import { DashboardOverview } from "./pages/DashboardOverview";
+import { DataFlowPage } from "./pages/DataFlowPage";
+import { ComplianceHeatmap } from "./pages/ComplianceHeatmap";
+import { CopilotPage } from "./pages/CopilotPage";
+import { PullRequestsPage } from "./pages/PullRequestsPage";
+import { PredictiveCompliancePage } from "./pages/PredictiveCompliancePage";
+import { ReportsPage } from "./pages/ReportsPage";
 
 export const router = createBrowserRouter([
   {
@@ -10,11 +17,20 @@ export const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
-    path: "/dashboard",
-    element: <DashboardPage />,
+    path: "/onboarding",
+    element: <OnboardingPage />,
   },
   {
-    path: "/issue/:id",
-    element: <IssueDetailPage />,
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      { path: "overview", element: <DashboardOverview /> },
+      { path: "data-flow", element: <DataFlowPage /> },
+      { path: "compliance", element: <ComplianceHeatmap /> },
+      { path: "copilot", element: <CopilotPage /> },
+      { path: "pull-requests", element: <PullRequestsPage /> },
+      { path: "predictive", element: <PredictiveCompliancePage /> },
+      { path: "reports", element: <ReportsPage /> },
+    ],
   },
 ]);

@@ -42,6 +42,17 @@ export interface ScanResult {
     medium: number;
     low: number;
   };
+  dataFlow?: {
+    nodes: any[];
+    edges: any[];
+    dataCollectionPoints: DataCollectionPoint[];
+  };
+  regulatoryMapping?: any;
+  predictiveForecast?: {
+    trend: string;
+    forecast: string;
+    projectedRiskScore: number;
+  };
 }
 
 // Sample repository issues
