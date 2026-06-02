@@ -27,7 +27,7 @@ export function DataFlowPage() {
     id: point.id,
     label: point.dataType,
     type: 'collection',
-    status: point.riskLevel === 'critical' ? 'critical' : point.riskLevel === 'high' ? 'warning' : 'secure',
+    status: point.riskLevel === 'critical' ? 'critical' : ['high', 'medium'].includes(point.riskLevel) ? 'warning' : 'secure',
     icon: point.type === 'location' ? Cloud : point.type === 'payment' ? Database : User,
     details: [
       { label: 'File', value: `${point.file}:${point.line}` },

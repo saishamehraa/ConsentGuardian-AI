@@ -9,3 +9,5 @@ build/
 server/build/
 server/.env
 tmp/
+scratch/
+scan_response.json

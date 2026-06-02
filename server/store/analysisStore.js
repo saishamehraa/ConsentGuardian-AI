@@ -19,7 +19,10 @@ const analysisSchema = new mongoose.Schema({
       low: Number
     },
     issues: [mongoose.Schema.Types.Mixed], 
-    dataCollectionPoints: [mongoose.Schema.Types.Mixed]
+    dataCollectionPoints: [mongoose.Schema.Types.Mixed],
+    dataFlow: mongoose.Schema.Types.Mixed,
+    regulatoryMapping: mongoose.Schema.Types.Mixed,
+    predictiveForecast: mongoose.Schema.Types.Mixed
   },
   createdAt: { type: Date, default: Date.now }
 });
