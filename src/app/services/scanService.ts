@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 // src/app/services/scanService.ts
 import { mockScanResult, type ScanResult, type ConsentIssue } from './mockData';
 

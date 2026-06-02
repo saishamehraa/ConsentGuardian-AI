@@ -11,6 +11,8 @@
 ![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB_Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white)
+![Gemini 2.5](https://img.shields.io/badge/Gemini_2.5_Flash-8E75B2?style=for-the-badge&logo=googlebard&logoColor=white)
+![OpenRouter](https://img.shields.io/badge/OpenRouter-000000?style=for-the-badge)
 
 ![AI Powered](https://img.shields.io/badge/AI-Powered-purple?style=for-the-badge)
 ![Privacy First](https://img.shields.io/badge/Privacy-First-blue?style=for-the-badge)
@@ -29,14 +31,29 @@
 
 # 📸 Product Screenshots
 
-## Dashboard Overview
+## 1. Dashboard Overview
+*A high-level executive view of your repository's privacy health, compliance readiness, and active AI Agents.*
 ![Dashboard](./assets/jpg1.png)
 
-## AI Issue Detection & Risk Analysis
+## 2. AI Issue Detection & PR Guardian
+*Autonomous pull request interception flagging problematic code changes that degrade privacy posture before they are merged.*
 ![Issue Analysis](./assets/jpg2.png)
 
-##  Data Flow Analysis Visualization
+## 3. Interactive Data Flow Intelligence
+*A pinch-to-zoom graph mapping exactly how PII moves through the application and exposing third-party sharing risks.*
 ![Data Flow Analysis](./assets/jpg3.png)
+
+## 4. Compliance Framework Heatmap (Add Screenshot Here)
+*Real-time cross-referencing of codebase architecture against GDPR, CCPA, COPPA, and PCI-DSS frameworks.*
+![Compliance Heatmap](./assets/jpg4.png)
+
+## 5. AI Copilot & Remediation (Add Screenshot Here)
+*Context-aware chat interface providing actionable, ready-to-merge code replacements to fix identified privacy risks.*
+![AI Copilot](./assets/jpg5.png)
+
+## 6. Premium Settings & LLM Configuration (Add Screenshot Here)
+*Enterprise configuration pane to hot-swap between Gemini/OpenRouter API and air-gapped Local Ollama instances.*
+![Settings Panel](./assets/jpg6.png)
 
 ---
 
@@ -104,9 +121,9 @@ Detects:
 
 ## 📊 Risk Intelligence Dashboard
 - Dynamic Consent Risk Score
-- Severity categorization
-- Compliance mapping
-- Real-time remediation updates
+- Interactive, pinch-to-zoom Data Flow mapping
+- Real-time Compliance framework mapping
+- Granular Settings for LLM Provider configuration
 
 ---
 
@@ -383,13 +400,14 @@ logger.info('Payment initiated:', {
 - Express.js
 - MongoDB Atlas
 - Mongoose
-- Ollama API
+- OpenRouter API (Primary LLM Engine)
+- Ollama API (Local Fallback)
 - simple-git
 
 ### AI Models
-- Gemma 2B
-- Llama 3
-- Mistral
+- Gemini 2.5 Flash Lite (via OpenRouter)
+- Llama 3 8B
+- Gemma 2B (Local via Ollama)
 
 ---
 
@@ -398,6 +416,8 @@ logger.info('Payment initiated:', {
 ### 1. Configure Environment Variables
 ```env
 PORT=8787
+OPENROUTER_API_KEY=sk-or-v1-...
+OPENROUTER_MODEL=google/gemini-2.5-flash-lite-preview-09-2025
 OLLAMA_BASE_URL=http://127.0.0.1:11434/v1
 OLLAMA_MODEL=gemma:2b
 MONGODB_URI=your_mongodb_uri

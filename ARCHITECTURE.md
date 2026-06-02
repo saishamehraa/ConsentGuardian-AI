@@ -44,7 +44,7 @@ The architecture is designed for:
 |---|---|
 | Frontend | React, TypeScript, Tailwind CSS |
 | Backend | Node.js, Express.js |
-| AI Layer | Ollama, Gemma 2B, Llama 3, Mistral |
+| AI Layer | OpenRouter API (Gemini 2.5 Flash), Ollama (Local Fallback) |
 | Database | MongoDB Atlas, Mongoose |
 | Parsing Engine | simple-git, fs, AST utilities |
 | Visualization | Recharts, shadcn/ui |
@@ -154,10 +154,10 @@ The architecture is designed for:
 
 ## Technologies
 
-* Ollama
-* Gemma 2B
-* Llama 3
-* Mistral
+* OpenRouter API (Primary Engine)
+* Gemini 2.5 Flash Lite (Primary Model)
+* Ollama API (Local Fallback)
+* Gemma 2B / Llama 3 (Local Models)
 
 ## Responsibilities
 
@@ -319,10 +319,12 @@ Supports:
 
 ## Privacy-First AI Execution
 
-Consent Guardian AI uses Local LLMs through Ollama.
+Consent Guardian AI utilizes a **Dual-Engine AI Architecture** configured via the Settings panel:
 
-This ensures:
+1. **Cloud-Accelerated (Primary)**: Uses OpenRouter API with models like Gemini 2.5 Flash Lite for high-speed, highly accurate reasoning.
+2. **Air-Gapped Local (Fallback)**: Seamlessly falls back to Local LLMs through Ollama if API connectivity drops or for extreme-compliance environments.
 
+When using the Local Engine, the platform ensures:
 * source code never leaves infrastructure
 * offline-first execution
 * enterprise-safe analysis
