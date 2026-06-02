@@ -11,3 +11,4 @@ server/.env
 tmp/
 scratch/
 scan_response.json
+screenshot.js

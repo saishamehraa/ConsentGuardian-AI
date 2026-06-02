@@ -1,7 +1,7 @@
 # 🛡️ Consent Guardian AI
-### AI-Powered Privacy & Consent Intelligence Platform for Modern Codebases
+### The AI Privacy Engineer for Modern Codebases
 
-> Automatically scan repositories, detect privacy violations, analyze consent risks, and generate AI-powered compliance fixes using Local LLMs.
+> Continuous Privacy Intelligence & Compliance Automation that detects privacy risks, predicts compliance degradation, and generates AI-powered fixes before code reaches production.
 
 <p align="center">
 
@@ -31,8 +31,8 @@
 
 # 📸 Product Screenshots
 
-## 1. Dashboard Overview
-*A high-level executive view of your repository's privacy health, compliance readiness, and active AI Agents.*
+## 1. Executive Privacy Scorecard
+*A high-level view for legal teams, CISOs, and compliance officers to track privacy health, regulatory exposure, and compliance readiness.*
 ![Dashboard](./assets/jpg1.png)
 
 ## 2. AI Issue Detection & PR Guardian
@@ -43,21 +43,21 @@
 *A pinch-to-zoom graph mapping exactly how PII moves through the application and exposing third-party sharing risks.*
 ![Data Flow Analysis](./assets/jpg3.png)
 
-## 4. Compliance Framework Heatmap (Add Screenshot Here)
+## 4. Compliance Framework Heatmap
 *Real-time cross-referencing of codebase architecture against GDPR, CCPA, COPPA, and PCI-DSS frameworks.*
 ![Compliance Heatmap](./assets/jpg4.png)
 
-## 5. AI Copilot & Remediation (Add Screenshot Here)
+## 5. AI Copilot & Remediation
 *Context-aware chat interface providing actionable, ready-to-merge code replacements to fix identified privacy risks.*
 ![AI Copilot](./assets/jpg5.png)
 
-## 6. Premium Settings & LLM Configuration (Add Screenshot Here)
+## 6. Enterprise Deployment Controls
 *Enterprise configuration pane to hot-swap between Gemini/OpenRouter API and air-gapped Local Ollama instances.*
 ![Settings Panel](./assets/jpg6.png)
 
 ---
 
-# ⚡ Key Highlights
+# ⚡ Why Teams Use Consent Guardian
 
 - AI-powered privacy compliance scanning
 - Local LLM-based secure repository analysis
@@ -81,31 +81,72 @@ They happen because developers unintentionally ship:
 - silent third-party data collection
 - manipulative dark patterns
 
-Consent Guardian AI transforms privacy compliance into an automated developer workflow.
+Consent Guardian AI transforms privacy compliance into an automated developer workflow. Privacy compliance today is largely reactive. Consent Guardian shifts privacy governance left by identifying, explaining, and remediating risks before code reaches production.
 
 ---
 
-# 🎯 Project Overview
+# 🎯 What Consent Guardian Does
 
-Consent Guardian AI is an AI-powered privacy intelligence platform that scans entire repositories to identify:
+Consent Guardian AI is an autonomous, **multi-agent** privacy governance platform that scans entire repositories to identify:
 - privacy violations
 - missing consent mechanisms
 - insecure data collection patterns
 - compliance risks
 
-Unlike traditional static analysis tools, Consent Guardian AI uses Local LLMs to semantically understand code behavior and generate compliance-aware remediation suggestions.
+Unlike traditional static analysis tools, Consent Guardian AI uses a coordinated multi-agent architecture to semantically understand code behavior, interact with developers, and generate compliance-aware remediation suggestions.
 
 ---
 
 # ✨ Core Capabilities
+
+## 🔮 Predictive Compliance Intelligence
+Consent Guardian doesn't just detect violations.
+
+It forecasts future compliance degradation by analyzing development patterns, repository history, and newly introduced code paths.
+
+### How Forecasting Works
+
+Consent Guardian compares repository baselines against newly introduced code changes.
+
+By analyzing:
+- pull request diffs
+- newly introduced data flows
+- privacy-sensitive API usage
+- consent regressions
+- historical compliance scores
+
+the platform estimates how a proposed change impacts future compliance readiness before deployment.
+
+> **Example Forecast:** "If this pull request is merged, GDPR compliance readiness drops from 92% to 78% due to unconsented geolocation tracking."
+
+## 🚨 Pull Request Guardian
+Consent Guardian reviews code before it reaches production.
+
+For every pull request, the PR Guardian Agent:
+* Detects privacy regressions
+* Calculates compliance impact
+* Blocks critical violations
+* Generates fix recommendations
+
+> **Example Finding:** "This pull request introduces geolocation collection without explicit user consent and increases GDPR exposure by 22%."
+
+## 🤖 Interactive Privacy Copilot
+Finding the problem is only half the battle. Consent Guardian acts as an interactive AI teammate.
+
+**Developer:** "Why is my GDPR score low?"
+**Guardian:** "Three location-tracking endpoints collect data before consent."
+**Developer:** "Show me where."
+**Guardian:** *(Opens files instantly and highlights the insecure `navigator.geolocation` calls)*
+
+**Developer:** "Which services receive this data?"
+**Guardian:** "I identified third-party integrations that receive location-related metadata through multiple application endpoints and highlighted the affected code paths."
 
 ## 🔍 Repository Scanning
 - Full repository analysis
 - Recursive file traversal
 - AST-aware contextual parsing
 
-## 🧠 AI Privacy Detection
-
+## 🧠 Multi-Agent Privacy Detection
 Detects:
 - hidden tracking
 - geolocation misuse
@@ -114,16 +155,13 @@ Detects:
 - dark patterns
 - biometric/children’s data misuse
 
-## 🛠️ AI-Powered Remediation
-- developer-review remediation workflows
-- Ready-to-merge code replacements
-- Before/after code comparison
-
-## 📊 Risk Intelligence Dashboard
-- Dynamic Consent Risk Score
-- Interactive, pinch-to-zoom Data Flow mapping
-- Real-time Compliance framework mapping
-- Granular Settings for LLM Provider configuration
+## 📊 Executive Privacy Scorecard
+Enterprise buyers, legal teams, and compliance officers get a unified view of:
+- Privacy Health Score
+- Compliance Readiness
+- High Risk Findings
+- Regulatory Exposure
+- Trend Analysis
 
 ---
 
@@ -158,7 +196,7 @@ Final scores are categorized into:
 
 ---
 
-## 2. AI Scanner Engine
+## 2. Multi-Agent Privacy Intelligence Engine
 **Tech:** `Ollama`, Local LLMs
 
 ### Responsibilities
@@ -193,54 +231,69 @@ Final scores are categorized into:
 # ⚙️ How It Works
 
 1. Connect Repository
-2. Scan Codebase
-3. Detect Privacy Violations
-4. Analyze Consent Risks
-5. Generate AI-Powered Fixes
-6. Improve Compliance Score
+2. Orchestrate Multi-Agent Analysis
+3. Map Data Flows & Regulatory Exposure
+4. Detect Privacy & Consent Violations
+5. Forecast Compliance Impact
+6. Generate AI-Powered Remediation
+7. Improve Privacy Health & Compliance Readiness
 
 ---
 
-# 🏗️ High-Level System Architecture
+# 🏗️ High-Level Multi-Agent Architecture
 
 ```text
-                ┌─────────────────────┐
-                │   Frontend Client   │
-                │ React + TypeScript  │
-                └──────────┬──────────┘
-                           │
-                           ▼
-                ┌─────────────────────┐
-                │   Express Backend   │
-                │   API Gateway       │
-                └──────────┬──────────┘
-                           │
-        ┌──────────────────┼──────────────────┐
-        ▼                  ▼                  ▼
+                    Repository
+                          │
+                          ▼
 
-┌────────────────┐ ┌────────────────┐ ┌──────────────────┐
-│ Repository     │ │ AI Scanner     │ │ Risk & Consent   │
-│ Parsing Engine │ │ Engine         │ │ Intelligence     │
-└────────────────┘ └────────────────┘ └──────────────────┘
-        │                  │                  │
-        └──────────────────┼──────────────────┘
-                           ▼
+            ┌─────────────────────────┐
+            │ Orchestrator Agent      │
+            └──────────┬──────────────┘
+                       │
 
-                ┌─────────────────────┐
-                │ Remediation Engine  │
-                └──────────┬──────────┘
-                           ▼
-                ┌─────────────────────┐
-                │ MongoDB Atlas       │
-                └─────────────────────┘
+ ┌────────────┬────────────┬────────────┬────────────┐
+ ▼            ▼            ▼            ▼
+
+Privacy     Data Flow   Compliance    PR Guardian
+Agent       Agent       Agent         Agent
+
+ └────────────┴────────────┴────────────┘
+                       │
+                       ▼
+
+             Risk Scoring Agent
+                       │
+                       ▼
+
+             Remediation Agent
+                       │
+                       ▼
+
+              Privacy Copilot
+                       │
+                       ▼
+
+      Executive Privacy Intelligence Dashboard
 ```
 
-### Core Pipeline
-- Repository ingestion
-- Semantic privacy analysis
-- Consent risk scoring
-- AI remediation generation
-- Dashboard analytics visualization
+### Agent Collaboration Workflow
+Consent Guardian is not a sequential workflow. It relies on a coordinated multi-agent architecture orchestrated by the Orchestrator Agent. Each agent operates with a dedicated system role, structured outputs, and specialized prompts coordinated through the Orchestrator Agent.
+
+#### 🧠 Orchestrator Agent
+**Responsibilities:**
+- Coordinate agent execution
+- Aggregate agent findings
+- Resolve conflicting assessments
+- Prioritize analysis pipelines
+- Maintain scan context across agents
+
+1. **Privacy Detection Agent** ➔ *Extracts raw privacy findings*
+2. **Data Flow Agent** ➔ *Provides architectural context to findings*
+3. **Compliance Agent** ➔ *Maps findings to GDPR/CCPA regulations*
+4. **Risk Scoring Agent** ➔ *Prioritizes issues based on impact*
+5. **Remediation Agent** ➔ *Generates merge-ready fixes*
+6. **Copilot Agent** ➔ *Explains decisions interactively to developers*
 
 ➡️ [View Detailed Architecture Documentation](./ARCHITECTURE.md)
 
@@ -313,9 +366,40 @@ This enables detection of behavioral privacy violations that traditional static 
 |---|---|
 | Regex-based detection | Semantic AI reasoning |
 | Rule-only systems | Context-aware analysis |
+| Point-in-time scans | Continuous privacy intelligence |
+| Reactive compliance audits | Predictive compliance forecasting |
 | Detection only | Detection + remediation |
+| Code findings | Code findings + regulatory context |
+| Developers interpret results | AI explains impact & fixes |
 | Cloud-dependent | Local AI privacy-first |
 | Security focused | Privacy + consent focused |
+
+---
+
+# 💼 Business Impact
+
+Consent Guardian helps organizations:
+
+- Reduce privacy audit preparation time
+- Detect compliance risks earlier in the SDLC
+- Prevent costly regulatory violations
+- Improve developer privacy awareness
+- Enable privacy-by-design practices across engineering teams
+- Establish continuous governance workflows
+
+---
+
+# 📈 Example Findings
+
+In a demonstration repository scan, Consent Guardian identified:
+
+- Geolocation collection before user consent
+- Marketing preferences stored without explicit opt-in
+- Sensitive payment fields logged to application logs
+- Analytics integrations lacking documented consent paths
+- GDPR Article 7 consent management gaps
+
+and generated remediation suggestions for each issue.
 
 ---
 
@@ -404,10 +488,11 @@ logger.info('Payment initiated:', {
 - Ollama API (Local Fallback)
 - simple-git
 
-### AI Models
-- Gemini 2.5 Flash Lite (via OpenRouter)
-- Llama 3 8B
-- Gemma 2B (Local via Ollama)
+### Hybrid AI Architecture
+- Cloud LLM reasoning
+- Local privacy-preserving inference
+- Automated fallback orchestration
+- Multi-model remediation generation
 
 ---
 
@@ -483,10 +568,9 @@ Future roadmap items such as CI/CD enforcement, GitHub App integration, and auto
 Consent Guardian AI aims to become an autonomous AI governance layer for modern software ecosystems.
 
 ### Future capabilities include:
-- predictive privacy risk detection
-- consent regression forecasting
 - autonomous compliance guardrails
 - continuous data flow monitoring
+- privacy impact assessments
 
 ---
 
@@ -496,6 +580,7 @@ Consent Guardian AI aims to become an autonomous AI governance layer for modern 
 - AI findings may require developer verification
 - Some framework-specific consent flows may need custom rules
 - Prototype currently optimized for JavaScript/TypeScript repositories
+- Compliance recommendations should not replace legal review
 
 ---
 
