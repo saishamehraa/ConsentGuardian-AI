@@ -144,7 +144,7 @@ app.post("/api/fix", async (req, res) => {
 app.post("/api/chat", async (req, res) => {
   const { message, history, contextIssues } = req.body ?? {};
   const openRouterKey = process.env.OPENROUTER_API_KEY;
-  const model = process.env.OPENROUTER_MODEL || "google/gemini-2.0-flash-lite-001";
+  const model = process.env.OPENROUTER_MODEL || "google/gemini-2.5-flash-lite-preview-09-2025";
 
   if (!openRouterKey) {
     return res.status(500).json({ error: "OpenRouter API Key not configured." });

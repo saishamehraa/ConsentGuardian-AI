@@ -5,7 +5,7 @@ export async function scanCodeWithOllama(files) {
   const ollamaBaseUrl = process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434/v1";
   const ollamaModel = process.env.OLLAMA_MODEL || "gemma:2b";
   const openRouterKey = process.env.OPENROUTER_API_KEY;
-  const openRouterModel = process.env.OPENROUTER_MODEL || "google/gemini-2.0-flash-lite-001";
+  const openRouterModel = process.env.OPENROUTER_MODEL || "google/gemini-2.5-flash-lite-preview-09-2025";
   
   let detectedIssues = [];
 
